@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function testCors(resultsCallback) {
+        const xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = () => {
+            if (xmlHttp.readyState === XMLHttpRequest.DONE && xmlHttp.status === 200) {
+                resultsCallback(JSON.parse(xmlHttp.response));
+            }
+        }
+
+        xmlHttp.open("GET", "https://bg-weatherforecastapi.azurewebsites.net/weatherforecast", true);
+        //xmlHttp.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("AuthorizationToken"));
+        //xmlHttp.setRequestHeader("X-Client-Id", "F856A4CA-3AA3-4E30-8770-FAD53EA50002");
+        xmlHttp.send();
+    }
+    
+    testCors(function (result) {
+        console.log(result);
+    });
+</script>
+</body>
+</html>
